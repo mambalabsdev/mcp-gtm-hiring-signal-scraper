@@ -52,6 +52,29 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 
 The tool returns the actor's flat JSON for the scanned company. Fields include the detected ATS platform, the count of open GTM roles, the matched role titles and their categories, and a seniority read. Companies on an ATS outside Greenhouse, Lever, and Ashby come back with a null platform, a zero role count, and no error. See the Apify Store page for the full output schema.
 
+## Example output
+
+```json
+{
+  "domain": "stripe.com",
+  "company_name": "Stripe",
+  "gtm_hiring_signal": true,
+  "ats_platform": "greenhouse",
+  "gtm_role_count": 12,
+  "signal_strength": "high",
+  "top_gtm_role": "Head of Revenue",
+  "career_page_url": "https://boards.greenhouse.io/stripe",
+  "run_date": "2026-05-28"
+}
+```
+
+## Features
+
+- Cascading ATS detection: Greenhouse, Lever, Ashby
+- GTM role filtering with 3-tier signal strength (high, medium, low)
+- Flat JSON output designed for Clay column mapping
+- Optional role_filter and ats_slug inputs
+
 ## Full actor documentation
 
 This server is a thin client and holds no scraping logic. For the complete input and output reference, pricing, and run history, see the Apify Store page:
