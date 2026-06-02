@@ -27,10 +27,20 @@ const server = new McpServer({
   version: pkg.version,
 });
 
-server.tool(
+server.registerTool(
   "scan_gtm_hiring_signals",
-  "Scan company career pages to detect GTM hiring activity. Returns structured data on sales, marketing, and revenue operations job postings. Supports Greenhouse, Lever, and Ashby ATS platforms. Output is Clay-ready flat JSON.",
   {
+    title: "Scan GTM Hiring Signals",
+    description:
+      "Scan company career pages to detect GTM hiring activity. Returns structured data on sales, marketing, and revenue operations job postings. Supports Greenhouse, Lever, and Ashby ATS platforms. Output is Clay-ready flat JSON. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
+    annotations: {
+      title: "Scan GTM Hiring Signals",
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true,
+    },
+    inputSchema: {
     domain: z
       .string()
       .describe(
@@ -48,6 +58,7 @@ server.tool(
       .describe(
         "Optional ATS board slug override for when it differs from the domain. Example: clay.com uses claylabs on Ashby. If omitted, the scraper auto-probes common slug variants.",
       ),
+  },
   },
   async ({ domain, role_filter, ats_slug }) => {
     if (!APIFY_TOKEN) {
