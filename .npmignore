@@ -9,3 +9,5 @@ tsconfig.json
 .idea/
 .mcp.json
 .cursor-plugin/
+smithery.yaml
+.smithery/
