@@ -1,6 +1,6 @@
 # GTM Hiring Signal Scraper MCP Server
 
-[![Smithery](https://smithery.ai/badge/mambabuilt/mcp-gtm-hiring-signal-scraper)](https://smithery.ai/servers/mambabuilt/mcp-gtm-hiring-signal-scraper)
+[![Smithery](https://smithery.ai/badge/mambabuilt/mcp-gtm-hiring-signal-scraper)](https://smithery.ai/servers/mambabuilt/mcp-gtm-hiring-signal-scraper) [![mcp-gtm-hiring-signal-scraper MCP server](https://glama.ai/mcp/servers/mambalabsdev/mcp-gtm-hiring-signal-scraper/badges/card.svg)](https://glama.ai/mcp/servers/mambalabsdev/mcp-gtm-hiring-signal-scraper)
 
 An MCP server that detects go-to-market hiring activity from company career pages. It wraps the Mamba Labs GTM Hiring Signal Scraper on Apify and returns Clay-ready flat JSON to any MCP client.
 
