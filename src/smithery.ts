@@ -20,7 +20,7 @@ export const configSchema = z.object({
 export const stateful = false;
 
 const ACTOR_ENDPOINT =
-  "https://api.apify.com/v2/acts/mambalabs~gtm-hiring-signal-scraper/run-sync-get-dataset-items?timeout=300";
+  "https://api.apify.com/v2/acts/D7O1SA2EqwHGsGr1P/run-sync-get-dataset-items?timeout=300";
 const USER_AGENT =
   "mambalabs-mcp @mambalabsdev/mcp-gtm-hiring-signal-scraper (smithery-hosted)";
 
