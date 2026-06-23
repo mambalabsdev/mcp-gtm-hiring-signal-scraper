@@ -4,6 +4,20 @@
 
 An MCP server that detects go-to-market hiring activity from company career pages. It wraps the Mamba Labs GTM Hiring Signal Scraper on Apify and returns Clay-ready flat JSON to any MCP client.
 
+## What's Inside
+
+- [What it does](#what-it-does)
+- [Quick start](#quick-start)
+- [Prerequisites](#prerequisites)
+- [Example prompts](#example-prompts)
+- [Inputs](#inputs)
+- [Output](#output)
+- [Example output](#example-output)
+- [Features](#features)
+- [Full actor documentation](#full-actor-documentation)
+- [Mamba Labs GTM Suite](#mamba-labs-gtm-suite)
+- [License](#license)
+
 ## What it does
 
 Give it a company domain and it scans that company's job board for sales, marketing, and revenue operations roles across Greenhouse, Lever, and Ashby. You get back a structured read on how hard that company is hiring for go-to-market, ready to drop into Clay, a CRM, or an AI agent workflow. All of the scraping runs on Apify. This package is a thin client that calls the actor and hands back the result.
