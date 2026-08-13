@@ -1,11 +1,16 @@
 {
   "name": "@mambalabsdev/mcp-gtm-hiring-signal-scraper",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MCP server for GTM Hiring Signal Scraper. Detects GTM hiring activity from company career pages via Apify. Clay-ready output.",
   "type": "module",
   "bin": {
     "mcp-gtm-hiring-signal-scraper": "./build/index.js"
   },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
     "prepublishOnly": "npm run build"
