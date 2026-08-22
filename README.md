@@ -20,7 +20,7 @@ An MCP server that detects go-to-market hiring activity from company career page
 
 ## What it does
 
-Give it a company domain and it scans that company's job board for sales, marketing, and revenue operations roles across Greenhouse, Lever, and Ashby. You get back a structured read on how hard that company is hiring for go-to-market, ready to drop into Clay, a CRM, or an AI agent workflow. All of the scraping runs on Apify. This package is a thin client that calls the actor and hands back the result.
+Give it a company domain and it scans that company's job board for sales, marketing, and revenue operations roles across Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Personio. You get back a structured read on how hard that company is hiring for go-to-market, ready to drop into Clay, a CRM, or an AI agent workflow. All of the scraping runs on Apify. This package is a thin client that calls the actor and hands back the result.
 
 ## Quick start
 
@@ -64,7 +64,7 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 
 ## Output
 
-The tool returns the actor's flat JSON for the scanned company. Fields include the detected ATS platform, the count of open GTM roles, the matched role titles and their categories, and a seniority read. Companies on an ATS outside Greenhouse, Lever, and Ashby come back with a null platform, a zero role count, and no error. See the Apify Store page for the full output schema.
+The tool returns the actor's flat JSON for the scanned company. Fields include the detected ATS platform, the count of open GTM roles, the matched role titles and their categories, and a seniority read. Companies on an ATS outside those six come back with a null platform, a zero role count, and no error. See the Apify Store page for the full output schema.
 
 ## Example output
 
@@ -84,7 +84,7 @@ The tool returns the actor's flat JSON for the scanned company. Fields include t
 
 ## Features
 
-- Cascading ATS detection: Greenhouse, Lever, Ashby
+- Cascading ATS detection: Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Personio
 - GTM role filtering with 3-tier signal strength (high, medium, low)
 - Flat JSON output designed for Clay column mapping
 - Optional role_filter and ats_slug inputs

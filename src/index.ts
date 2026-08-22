@@ -32,7 +32,7 @@ server.registerTool(
   {
     title: "Scan GTM Hiring Signals",
     description:
-      "Scan company career pages to detect GTM hiring activity. Returns structured data on sales, marketing, and revenue operations job postings. Supports Greenhouse, Lever, and Ashby ATS platforms. Output is Clay-ready flat JSON. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
+      "Scan company career pages to detect GTM hiring activity. Returns structured data on sales, marketing, and revenue operations job postings. Supports the Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Personio ATS platforms. Output is Clay-ready flat JSON. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
     annotations: {
       title: "Scan GTM Hiring Signals",
       readOnlyHint: true,
