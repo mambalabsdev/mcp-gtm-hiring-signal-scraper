@@ -32,7 +32,7 @@ server.registerTool(
   {
     title: "Scan GTM Hiring Signals",
     description:
-      "Scan company career pages to detect GTM hiring activity. Returns structured data on sales, marketing, and revenue operations job postings. Supports Greenhouse, Lever, and Ashby ATS platforms. Output is Clay-ready flat JSON. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
+      "Scan company career pages to detect GTM hiring activity. Returns structured data on sales, marketing, and revenue operations job postings. Supports the Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Personio ATS platforms. Output is Clay-ready flat JSON. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
     annotations: {
       title: "Scan GTM Hiring Signals",
       readOnlyHint: true,
@@ -58,9 +58,34 @@ server.registerTool(
       .describe(
         "Optional ATS board slug override for when it differs from the domain. Example: clay.com uses claylabs on Ashby. If omitted, the scraper auto-probes common slug variants.",
       ),
+    mode: z
+      .enum(["single", "batch", "velocity"])
+      .optional()
+      .describe(
+        "Processing mode. \"single\" scores the domain. \"velocity\" compares this run against previous_gtm_role_count and previous_run_date to report role changes since last time. \"batch\" scores a list of domains and is an actor-level mode this single-call tool does not supply a list for. Default: \"single\".",
+      ),
+    include_role_details: z
+      .boolean()
+      .optional()
+      .describe(
+        "When true, include the full per-role detail array (title, department, location, url) in the output. Default: false.",
+      ),
+    previous_gtm_role_count: z
+      .number()
+      .int()
+      .optional()
+      .describe(
+        "GTM role count from the previous run for this domain. Used in velocity mode to compute the delta, which is what makes a scheduled run cheap.",
+      ),
+    previous_run_date: z
+      .string()
+      .optional()
+      .describe(
+        "ISO date of the previous run for this domain, e.g. 2026-07-15. Used in velocity mode to report days between runs.",
+      ),
   },
   },
-  async ({ domain, role_filter, ats_slug }) => {
+  async ({ domain, role_filter, ats_slug, mode, include_role_details, previous_gtm_role_count, previous_run_date }) => {
     if (!APIFY_TOKEN) {
       return { isError: true, content: [{ type: "text", text: "APIFY_TOKEN is not set. Create a token at https://console.apify.com/account/integrations and set it as the APIFY_TOKEN environment variable." }] };
     }
@@ -68,6 +93,10 @@ server.registerTool(
     const input: Record<string, unknown> = { domain };
     if (role_filter !== undefined) input.role_filter = role_filter;
     if (ats_slug !== undefined) input.ats_slug = ats_slug;
+    if (mode !== undefined) input.mode = mode;
+    if (include_role_details !== undefined) input.include_role_details = include_role_details;
+    if (previous_gtm_role_count !== undefined) input.previous_gtm_role_count = previous_gtm_role_count;
+    if (previous_run_date !== undefined) input.previous_run_date = previous_run_date;
 
     let response: Response;
     try {

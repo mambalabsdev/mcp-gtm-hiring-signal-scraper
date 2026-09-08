@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "mcp-gtm-hiring-signal-scraper",
-  "version": "1.0.6",
+  "version": "1.2.0",
   "description": "MCP server for GTM Hiring Signal Scraper. Detects GTM hiring activity from company career pages via Apify. Clay-ready output.",
   "author": {
     "name": "Mamba Labs"
