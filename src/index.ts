@@ -29,12 +29,11 @@ function compact(obj: Record<string, unknown>): Record<string, unknown> {
   return out;
 }
 
-// How long the actor run itself is allowed to take, in seconds. 300 s is the
-// run timeout this wrapper has always set (it was the run-sync timeout), kept
-// so a run costs the caller no more than it did before. The difference is that
-// the wrapper now waits for the run's own terminal status instead of an HTTP
-// 408 that arrived while the run kept going and kept billing.
-const ACTOR_RUN_TIMEOUT_SECS = 300;
+// How long the actor run itself is allowed to take, in seconds. One value for
+// every Mamba Labs wrapper, set 2026-10-05: start and poll exists so a long run
+// survives, and a shorter limit would end the long runs it was built for. Past
+// this limit the run ends TIMED-OUT and the caller is told so, with the run id.
+const ACTOR_RUN_TIMEOUT_SECS = 1800;
 
 // How long this wrapper waits for that run, in milliseconds. The actor's own
 // timeout plus two minutes, so the run's own TIMED-OUT status is what the
@@ -233,7 +232,7 @@ server.registerTool(
       .array(z.string())
       .optional()
       .describe(
-        "List of bare domains to scan in one run when mode is \"batch\", for example [\"stripe.com\", \"figma.com\"]. One row per company. The run timeout is 300 seconds, so keep a batch to a few dozen domains per call.",
+        "List of bare domains to scan in one run when mode is \"batch\", for example [\"stripe.com\", \"figma.com\"]. One row per company. The run timeout is 1,800 seconds; a very large batch can still reach it.",
       ),
     mode: z
       .enum(["single", "batch", "velocity"])

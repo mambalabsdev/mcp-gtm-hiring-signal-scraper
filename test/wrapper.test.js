@@ -123,7 +123,7 @@ test("a call starts the run, polls it, and returns the dataset", async () => {
   assert.deepEqual(JSON.parse(msg.result.content[0].text), [{ mocked: true, row_status: "ok" }]);
   const calls = readFileSync(logFile, "utf8").trim().split("\n").map((l) => JSON.parse(l));
   assert.equal(calls[0].method, "POST");
-  assert.match(calls[0].url, new RegExp(`/v2/acts/${ACTOR_ID}/runs\\?timeout=`));
+  assert.match(calls[0].url, new RegExp(`/v2/acts/${ACTOR_ID}/runs\\?timeout=1800(&|$)`));
   assert.ok(calls.some((c) => c.url.endsWith("/v2/actor-runs/run123")), "never polled the run");
   assert.ok(calls.some((c) => c.url.includes("/v2/datasets/ds123/items")), "never read the dataset");
   assert.ok(!calls.some((c) => c.url.includes("run-sync")), "called run-sync");
