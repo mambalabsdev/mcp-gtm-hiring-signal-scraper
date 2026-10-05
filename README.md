@@ -55,12 +55,18 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 - "Scan openai.com for sales and revenue operations job postings."
 - "Is datadoghq.com ramping up GTM hiring? Use the GTM hiring scanner."
 - "Pull the GTM hiring signal for figma.com and list which roles are open."
+- "Scan stripe.com, figma.com, and notion.so for GTM hiring in one batch."
 
 ## Inputs
 
 - `domain` (required): the bare company domain, no `https://` and no trailing slash. Example: `stripe.com`
 - `role_filter` (optional): a list of GTM role keywords to filter on. Leave it out to use the built-in keyword list.
 - `ats_slug` (optional): override the ATS board slug when it differs from the domain. Example: `clay.com` uses `claylabs` on Ashby.
+- `domains` (optional): a list of bare domains scanned in one run when `mode` is `batch`, one row per company. `domain` is still required by the schema, so pass the first domain there too.
+- `mode` (optional): `single` (default) scores `domain`; `batch` scores every entry in `domains`; `velocity` compares this run against `previous_gtm_role_count` and `previous_run_date` to report role changes since the last run.
+- `include_role_details` (optional): when true, adds the full per role array (title, department, location, URL). Default false.
+- `previous_gtm_role_count` (optional): the GTM role count from your previous run for this domain. Used in velocity mode to compute the delta, which is what makes a scheduled run cheap.
+- `previous_run_date` (optional): ISO date of your previous run for this domain, for example `2026-07-15`. Used in velocity mode to report the days between runs.
 
 ## Output
 
@@ -88,6 +94,7 @@ The tool returns the actor's flat JSON for the scanned company. Fields include t
 - GTM role filtering with 3-tier signal strength (high, medium, low)
 - Flat JSON output designed for Clay column mapping
 - Optional role_filter and ats_slug inputs
+- Batch mode (`domains`) and velocity mode for scheduled runs
 
 ## Full actor documentation
 
@@ -99,24 +106,12 @@ https://apify.com/mambalabs/gtm-hiring-signal-scraper
 
 ## Mamba Labs GTM Suite
 
-This server is part of the **Mamba Labs GTM Suite**, a fleet of twelve specialized MCP servers for go-to-market signal intelligence, each backed by a dedicated Apify actor.
+This server is one of 54 Mamba Labs MCP servers, each a thin client for one Mamba Labs actor on Apify. Every actor returns flat, Clay-ready rows that join on the company domain.
 
-| Actor | Immutable Actor ID |
-|---|---|
-| [GTM Hiring Signal Scraper](https://console.apify.com/actors/D7O1SA2EqwHGsGr1P) | `D7O1SA2EqwHGsGr1P` |
-| [GTM Tech Stack Signal Enrichment](https://console.apify.com/actors/qyd7nNyqFPelQViBx) | `qyd7nNyqFPelQViBx` |
-| [GTM Signals Aggregator](https://console.apify.com/actors/xKdRfnfFNkdMpFuNs) | `xKdRfnfFNkdMpFuNs` |
-| [Job Board Keyword Signal Scanner](https://console.apify.com/actors/4DvqpvhMR74NLcDDY) | `4DvqpvhMR74NLcDDY` |
-| [Domain to LinkedIn URL Resolver](https://console.apify.com/actors/3HtnSaqPHOg1Qg5gx) | `3HtnSaqPHOg1Qg5gx` |
-| [ICP Fit Scorer](https://console.apify.com/actors/W161DT8W4kW55dMFh) | `W161DT8W4kW55dMFh` |
-| [Domain Deliverability Checker](https://console.apify.com/actors/0tVgxI7A6o9jMlxmc) | `0tVgxI7A6o9jMlxmc` |
-| [Company Firmographic Enricher](https://console.apify.com/actors/YlUtLWjfPpqykmB8g) | `YlUtLWjfPpqykmB8g` |
-| [Company Social Presence Mapper](https://console.apify.com/actors/4k6CCemkgBDz18m2h) | `4k6CCemkgBDz18m2h` |
-| [Company Identity Resolver](https://console.apify.com/actors/lr8fTRAmZCBZmuwwh) | `lr8fTRAmZCBZmuwwh` |
-| [Company Change-Event Feed](https://console.apify.com/actors/oX44rS0fkEJ3rXLWe) | `oX44rS0fkEJ3rXLWe` |
-| [Funding & Press Signal Scanner](https://console.apify.com/actors/FS13X6dhQVgX3XOM6) | `FS13X6dhQVgX3XOM6` |
+- Browse every server: https://mambabuilt.com/servers
+- Browse every actor on the Apify Store: https://apify.com/mambalabs
 
-> Built by [Mamba Labs](https://github.com/mambalabsdev) | [npm](https://www.npmjs.com/org/mambalabsdev) | [Apify Store](https://apify.com/mambalabs)
+> Built by [Mamba Labs](https://mambabuilt.com) | [npm](https://www.npmjs.com/org/mambalabsdev) | [Apify Store](https://apify.com/mambalabs)
 
 ## License
 

@@ -1,0 +1,82 @@
+{
+  "_provenance": {
+    "actorId": "D7O1SA2EqwHGsGr1P",
+    "buildId": "SagKWDKp2FCgfhibV",
+    "buildNumber": "0.1.32",
+    "readAt": "2026-10-05T15:41:20.400Z"
+  },
+  "title": "GTM Hiring Signal Scraper",
+  "description": "Input configuration for GTM Hiring Signal Scraper. Free Apify-plan users get 60 results per calendar month (resets monthly); upgrade for unlimited: https://apify.com/pricing?fpr=mamba",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domain": {
+      "title": "Company Domain",
+      "type": "string",
+      "description": "Bare domain without https:// or trailing slash. Example: stripe.com",
+      "prefill": "stripe.com",
+      "editor": "textfield"
+    },
+    "role_filter": {
+      "title": "Role Filter Keywords",
+      "type": "array",
+      "description": "Optional array of GTM role keywords to filter on. Defaults to built-in GTM_KEYWORDS list if omitted.",
+      "editor": "stringList"
+    },
+    "ats_slug": {
+      "title": "ATS Slug Override",
+      "type": "string",
+      "description": "Optional override for the ATS board slug when it differs from the domain (e.g. clay.com uses claylabs on Ashby). If omitted, the scraper auto-probes common slug variants.",
+      "editor": "textfield"
+    },
+    "domains": {
+      "title": "Company Domains (batch)",
+      "type": "array",
+      "description": "List of bare domains to process when mode is \"batch\". Each entry without https:// or trailing slash. Example: stripe.com",
+      "editor": "stringList"
+    },
+    "mode": {
+      "title": "Mode",
+      "type": "string",
+      "description": "Processing mode. \"single\" scores the domain field; \"batch\" scores every entry in the domains list; \"velocity\" compares this run against the previous_* values to detect role changes.",
+      "enum": [
+        "single",
+        "batch",
+        "velocity"
+      ],
+      "enumTitles": [
+        "Single domain",
+        "Batch (domains list)",
+        "Velocity (change detection)"
+      ],
+      "default": "single"
+    },
+    "include_role_details": {
+      "title": "Include Role Details",
+      "type": "boolean",
+      "description": "When true, include the full per-role detail array (title, department, location, url) in the output.",
+      "default": false
+    },
+    "previous_gtm_role_count": {
+      "title": "Previous GTM Role Count",
+      "type": "integer",
+      "description": "GTM role count from the previous run for this domain, used in velocity mode to compute the delta.",
+      "editor": "number"
+    },
+    "previous_run_date": {
+      "title": "Previous Run Date",
+      "type": "string",
+      "description": "ISO date of the previous run for this domain, used in velocity mode to report days between runs.",
+      "editor": "textfield"
+    },
+    "source_tag": {
+      "title": "Source Tag",
+      "type": "string",
+      "description": "Internal attribution tag set by Mamba Labs on published task examples. Not required, and nothing depends on it. Leave it empty.",
+      "editor": "hidden"
+    }
+  },
+  "required": [
+    "domain"
+  ]
+}
