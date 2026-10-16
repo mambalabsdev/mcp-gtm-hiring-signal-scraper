@@ -67,6 +67,7 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 - `include_role_details` (optional): when true, adds the full per role array (title, department, location, URL). Default false.
 - `previous_gtm_role_count` (optional): the GTM role count from your previous run for this domain. Used in velocity mode to compute the delta, which is what makes a scheduled run cheap.
 - `previous_run_date` (optional): ISO date of your previous run for this domain, for example `2026-07-15`. Used in velocity mode to report the days between runs.
+- `max_charge_usd` (optional): a cost cap in USD for this run. The actor stops before an item that could take its charges past this amount. Omit it to rely on the maximum cost per run set in Apify.
 
 ## Output
 
@@ -96,6 +97,15 @@ The tool returns the actor's flat JSON for the scanned company. Fields include t
 - Optional role_filter and ats_slug inputs
 - Batch mode (`domains`) and velocity mode for scheduled runs
 
+## Pricing
+
+Price per event on the Apify FREE plan, from the live pricing record; paid Apify plans pay less per event.
+
+| Event | Price (USD) |
+| --- | --- |
+| result (`apify-default-dataset-item`) | 0.05 |
+| Actor Start (`apify-actor-start`) | 0.00005 |
+
 ## Full actor documentation
 
 This server is a thin client and holds no scraping logic. For the complete input and output reference, pricing, and run history, see the Apify Store page:
@@ -106,7 +116,7 @@ https://apify.com/mambalabs/gtm-hiring-signal-scraper
 
 ## Mamba Labs GTM Suite
 
-This server is one of 54 Mamba Labs MCP servers, each a thin client for one Mamba Labs actor on Apify. Every actor returns flat, Clay-ready rows that join on the company domain.
+This server is one of 58 Mamba Labs MCP servers, each a thin client for one Mamba Labs actor on Apify. Every actor returns flat, Clay-ready rows that join on the company domain.
 
 - Browse every server: https://mambabuilt.com/servers
 - Browse every actor on the Apify Store: https://apify.com/mambalabs

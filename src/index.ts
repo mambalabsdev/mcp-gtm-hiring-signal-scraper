@@ -205,12 +205,13 @@ server.registerTool(
       "Scan company career pages to detect GTM hiring activity: open sales, marketing, and revenue operations roles, a role count, and a high, medium, or low signal strength. Reads the Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Personio job boards; a company on any other board returns a null ats_platform and a zero count, not an error. Use it to qualify an account before outreach, or on a schedule in velocity mode to see whether a company is ramping its GTM team. Use mode batch with domains for a list in one call. Output is Clay-ready flat JSON, one row per company. Requires an APIFY_TOKEN and consumes Apify credits per call.",
     annotations: {
       title: "Scan GTM Hiring Signals",
-      readOnlyHint: true,
+      readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: true,
     },
     inputSchema: {
+    max_charge_usd: z.number().min(0).optional().describe("Optional. The run stops before the next result that would take this run's charges over this amount, and keeps every result already charged. Leave empty to rely only on the maximum cost per run you set in Apify."),
     domain: z
       .string()
       .describe(
