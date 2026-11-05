@@ -118,7 +118,7 @@ https://apify.com/mambalabs/gtm-hiring-signal-scraper
 
 ## Mamba Labs GTM Suite
 
-This server is one of 58 Mamba Labs MCP servers, each a thin client for one Mamba Labs actor on Apify. Every actor returns flat, Clay-ready rows that join on the company domain.
+This server is one of 103 Mamba Labs MCP servers, each a thin client for one Mamba Labs actor on Apify. Every actor returns flat, Clay-ready rows that join on the company domain.
 
 - Browse every server: https://mambabuilt.com/servers
 - Browse every actor on the Apify Store: https://apify.com/mambalabs
